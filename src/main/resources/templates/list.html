@@ -23,7 +23,7 @@
 		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 			<div class="navbar-nav">
 				<a class="nav-item nav-link active" href="/form.html">회원가입</a> 
-				<a class="nav-item nav-link active" href="/list.html">사용자 목록</a> 
+				<a class="nav-item nav-link active" href="/list">사용자 목록</a> 
 				<a class="nav-item nav-link" href="#">Pricing</a>
 			</div>
 		</div>
@@ -41,16 +41,13 @@
 				</tr>
 			</thead>
 			<tbody>
+				{{#users}}
 				<tr>
-					<th scope="row">javajigi</th>
-					<td>자바지기</td>
-					<td>javajigi@slipp.net</td>
+					<th scope="row">{{userId}}</th>
+					<td>{{name}}</td>
+					<td>{{email}}</td>
 				</tr>
-				<tr>
-					<th scope="row">sanjigi</th>
-					<td>산지기</td>
-					<td>sanjigi@slipp.net</td>
-				</tr>
+				{{/users}}
 			</tbody>
 		</table>
 	</div>
