@@ -1,13 +1,13 @@
 package net.slipp.web;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import net.slipp.domain.User;
@@ -19,6 +19,28 @@ public class UserController {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@GetMapping("/loginForm")
+	public String loginForm() {
+		return "/user/login";
+	}
+	
+	@PostMapping("/login")
+	public String login(String userId, String password, HttpSession session) {
+		
+		User user = userRepository.findByUserId(userId);
+		if(user == null) {
+			return "/users/loginForm";
+		}
+		
+		if(!password.equals(user.getPassword())){
+			return "/users/loginForm";
+		}
+		
+		session.setAttribute("user",  user);
+		
+		return "redirect:/";
+	}
 	
 	@GetMapping("/form")
 	public String form() {
@@ -55,6 +77,9 @@ public class UserController {
 
 		return "redirect:/users";
 	}
+	
+	
+	
 	
 //	@PostMapping("/{id}/update")
 //	public String update(@PathVariable Long id, User newUser) {
