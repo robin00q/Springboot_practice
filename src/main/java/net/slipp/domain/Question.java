@@ -8,6 +8,7 @@ import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -23,6 +24,7 @@ public class Question {
 	
 	private String title;
 	
+	@Lob
 	private String contents;
 	
 	private LocalDateTime createDate;
@@ -48,4 +50,10 @@ public class Question {
 		this.contents = contents;
 		
 	}
+
+	public boolean isSameWriter(User loginUser) {
+		return this.writer.equals(loginUser);
+	}
+
+
 }
